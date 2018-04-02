@@ -12,10 +12,11 @@ class NewMinion extends React.Component {
             imageURL: imageURL.refs.imageURL.value
         }
 
-        if(!minionFormFields.imageURL) delete minionFormFields.imageURL
+        if(!minionFormFields.imageURL) delete minionFormFields.imageURL 
 
         httpClient.createMinion(minionFormFields).then((serverResponse) => {
             console.log(serverResponse.data)
+            this.props.history.push('/minions')
         })
     }
     render() {
