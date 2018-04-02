@@ -1,6 +1,15 @@
 import React from 'react'
 
 class Minions extends React.Component {
+
+    state = {
+        minions: []
+    }
+
+    componentDidMount() {
+        
+    }
+
     render(){
         return(
             <div className="Minions">
