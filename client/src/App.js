@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios'
+const httpClient = axios.create()
+
+httpClient({method: 'get', url: '/api/minions'}).then((serverResponse) => {
+  console.log(serverResponse.data)
+})
 
 class App extends Component {
   render() {
