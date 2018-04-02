@@ -4,6 +4,7 @@ import {Container} from 'reactstrap'
 import Navigation from './Navigation'
 import Home from './views/Home.js'
 import Minions from './views/Minions.js'
+import NewMinion from './views/NewMinion.js'
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
           <Navigation />
           <Route exact path="/" component={Home} />
           <Route exact path="/minions" component={Minions} />
+          <Route exact path="/minions/new" component={NewMinion} />
       </Container>
     );
   }

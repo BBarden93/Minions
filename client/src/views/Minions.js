@@ -1,4 +1,5 @@
 import React from 'react'
+import httpClient from '../httpClient.js'
 
 class Minions extends React.Component {
 
@@ -7,13 +8,21 @@ class Minions extends React.Component {
     }
 
     componentDidMount() {
-        
+        httpClient.getAllMinions().then((serverResponse) => {
+            this.setState({
+                minions: serverResponse.data 
+            })
+        }) 
     }
 
     render(){
+        const {minions} = this.state 
         return(
             <div className="Minions">
-                <h2>Number of Minions: 0</h2>
+                <h2>Number of Minions: {minions.length}</h2>
+                {minions.map((m) => {
+                    return <img src={m.imageURL} alt={m.name} key={m._id} />
+                })}
             </div>
         )
     }
