@@ -5,6 +5,6 @@ minionSchema = new mongoose.Schema({
     imageURL: {type: String, default: "https://goo.gl/u6GHrh"}
 }) 
 
-const Minion = mongoose.model('minion', minionSchema)
+const Minion = mongoose.model('Minion', minionSchema)
 
-module.exports = minionSchema
+module.exports = Minion

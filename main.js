@@ -1,38 +1,25 @@
 const
-    express = require('express'),
-    app = express(),
-    mongoose = require('mongoose'),
-    axios = require('axios'),
-    httpClient = axios.create(),
-    bodyParser = require('body-parser'),
-    logger = require('morgan'),
-    Minion = require('./Minion.js'),
-    // minionsRouter = new express.Router(),
-    PORT = 3000
+  express = require('express'),
+  app = express(),
+  mongoose = require('mongoose'),
+  logger = require('morgan'),
+  bodyParser = require('body-parser'),
+  PORT = process.env.PORT || 3001,
+  MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/minions',
+  minionsRouter = require('./routes/minions.js')
+
+mongoose.connect(MONGODB_URI, (err) => {
+  console.log(err || `Connected to MongoDB.`)
+})
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
-// app.use('/api/minions', minionsRouter)
 
-mongoose.connect('mongodb://localhost/minions', (err) => {
-    console.log(err || "Connected to Mongod")
+app.get('/', (req, res) => {
+  res.json({ message: 'root route.' })
 })
 
-app.get('/minions', (req, res) => {
-    Minion.find({}, (err, allMinions) => {
-        if(err) return console.log(err)
-        res.json(allMinions)
-    })
-})
-
-app.post('/minions', (req, res) => {
-    Minion.create({}, (err, newMinion) => {
-        if(err) return console.log(err)
-        res.json({success: true, message: 'New minion created.'})
-    })
-})
-
-
+app.use('/api/minions', minionsRouter)
 
 app.listen(PORT, (err) => {
     console.log(err || `Andre ${PORT}`)
